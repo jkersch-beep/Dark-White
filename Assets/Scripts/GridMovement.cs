@@ -2,9 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-// ADDING THESE HERE TEMPORARILY:
-// WILL MAKE A SCRIPT FOR BOX MOVEMENT
-// WILL MAKE A SEPERATE SCRIPT FOR CAMERA MOVEMENT
+// I CURRENTLY HAVE MADE TEST PREFABS FOR THE PLAYER, WALL, AND BOXES TO HELP SHOWCASE THE CURRENT SETUP.
 
 public class GridMovement : MonoBehaviour
 {
@@ -12,19 +10,16 @@ public class GridMovement : MonoBehaviour
     [SerializeField] private float moveDuration = 0.1f;
     // grid size, change if needed
     [SerializeField] private float gridSize = 1f;
-    // default to not moving
     private bool isMoving = false;
 
-    // update, checks per each frame
     void Update()
     {
-        // checks if is moving then determines the input
+        // this is the player movement
         if (!isMoving)
         {
             // set up currently for keyboard only, can add controller if we want
             var keyboard = Keyboard.current;
 
-            // checking what key was pressed and then moving in the direction
             // currently set up to only use WASD but can easily add arrow keys if we want
             if (keyboard.wKey.wasPressedThisFrame)
             {
@@ -45,17 +40,39 @@ public class GridMovement : MonoBehaviour
         }
     }
 
-    // movement between the grid
+    // this is for the actual grid movement
     private IEnumerator Move(Vector2 direction)
     {
-        // set that we are moving
-        isMoving = true;
 
         // check for current location and destination
         Vector2 startPosition = transform.position;
         Vector2 endPosition = startPosition + (direction * gridSize);
 
-        // move in direction with desired time
+        // checks if player is open to move or if something is in the way
+        // ENSURE PLAYER AND OBJECTS HAVE COLLIDERS
+        Collider2D hitCollider = Physics2D.OverlapCircle(endPosition, 0.2f);
+        if (hitCollider != null)
+        {
+            PushableBox box = hitCollider.GetComponent<PushableBox>();
+            // check if it is a box or a wall, and if it is possible to even be moved
+            if (box != null)
+            {
+                bool succPush = box.TryPush(direction);
+                if (!succPush)
+                {
+                    yield break;
+                }
+            }
+            else
+            {
+                yield break;
+            }
+        }
+
+        // make sure to keep this AFTER the wall/box check
+        isMoving = true;
+
+        // the actual movement happening
         float elapsedTime = 0;
         while (elapsedTime < moveDuration)
         {
@@ -65,10 +82,10 @@ public class GridMovement : MonoBehaviour
             yield return null;
         }
 
-        // ensure we moved to the right spot
+        // here to ensure movement was to the right spot
         transform.position = endPosition;
 
-        // no longer moving, changing back
+        // keep at the end
         isMoving = false;
     }
 }
