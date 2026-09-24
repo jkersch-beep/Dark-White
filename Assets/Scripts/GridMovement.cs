@@ -20,20 +20,19 @@ public class GridMovement : MonoBehaviour
             // set up currently for keyboard only, can add controller if we want
             var keyboard = Keyboard.current;
 
-            // currently set up to only use WASD but can easily add arrow keys if we want
-            if (keyboard.wKey.wasPressedThisFrame)
+            if (keyboard.wKey.wasPressedThisFrame || keyboard.upArrowKey.wasPressedThisFrame)
             {
                 StartCoroutine(Move(Vector2.up));
             }
-            else if (keyboard.sKey.wasPressedThisFrame)
+            else if (keyboard.sKey.wasPressedThisFrame || keyboard.downArrowKey.wasPressedThisFrame)
             {
                 StartCoroutine(Move(Vector2.down));
             }
-            else if (keyboard.aKey.wasPressedThisFrame)
+            else if (keyboard.aKey.wasPressedThisFrame || keyboard.leftArrowKey.wasPressedThisFrame)
             {
                 StartCoroutine(Move(Vector2.left));
             }
-            else if (keyboard.dKey.wasPressedThisFrame)
+            else if (keyboard.dKey.wasPressedThisFrame || keyboard.rightArrowKey.wasPressedThisFrame)
             {
                 StartCoroutine(Move(Vector2.right));
             }
@@ -49,9 +48,9 @@ public class GridMovement : MonoBehaviour
         Vector2 endPosition = startPosition + (direction * gridSize);
 
         // checks if player is open to move or if something is in the way
-        // ENSURE PLAYER AND OBJECTS HAVE COLLIDERS
+        // ENSURE PLAYER AND OBJECTS HAVE COLLIDERS.
         Collider2D hitCollider = Physics2D.OverlapCircle(endPosition, 0.2f);
-        if (hitCollider != null)
+        if (hitCollider != null && !hitCollider.isTrigger)
         {
             PushableBox box = hitCollider.GetComponent<PushableBox>();
             // check if it is a box or a wall, and if it is possible to even be moved
