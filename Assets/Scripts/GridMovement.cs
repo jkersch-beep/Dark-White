@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 // I CURRENTLY HAVE MADE TEST PREFABS FOR THE PLAYER, WALL, AND BOXES TO HELP SHOWCASE THE CURRENT SETUP.
 
@@ -14,12 +15,11 @@ public class GridMovement : MonoBehaviour
 
     void Update()
     {
+        var keyboard = Keyboard.current;
         // this is the player movement
         if (!isMoving)
         {
             // set up currently for keyboard only, can add controller if we want
-            var keyboard = Keyboard.current;
-
             if (keyboard.wKey.wasPressedThisFrame || keyboard.upArrowKey.wasPressedThisFrame)
             {
                 StartCoroutine(Move(Vector2.up));
@@ -36,6 +36,18 @@ public class GridMovement : MonoBehaviour
             {
                 StartCoroutine(Move(Vector2.right));
             }
+        }
+
+        // keybind to reset the scene, we can add additional keybinds here if we want
+        if (keyboard.leftCtrlKey.wasPressedThisFrame)
+        {
+            // clears the saved positions before the scene 
+            PositionSaver[] savers = FindObjectsByType<PositionSaver>(FindObjectsSortMode.None);
+            foreach (PositionSaver saver in savers)
+            {
+                saver.ClearSaves();
+            }
+            SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
         }
     }
 
