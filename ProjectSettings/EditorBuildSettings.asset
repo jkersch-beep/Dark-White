@@ -21,11 +21,14 @@ EditorBuildSettings:
     path: Assets/Scenes/PuzzleD2.unity
     guid: 8c12f2676510d7e4985816863bad3b8d
   - enabled: 1
-    path: Assets/Scenes/PuzzleD3.unity
+    path: Assets/Scenes/UnpackedRoom.unity
     guid: 0460995704cce9d49be0e95e1e5ad28b
   - enabled: 1
     path: Assets/Scenes/PuzzleD4.unity
     guid: dfdac2d5611c1e641a333ddf11ff4c78
+  - enabled: 1
+    path: Assets/Scenes/EntryHouse.unity
+    guid: 9195e93d0b0b15b4c9aaf4faf03c4c36
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
