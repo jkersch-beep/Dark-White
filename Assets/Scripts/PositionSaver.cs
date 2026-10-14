@@ -26,6 +26,7 @@ public class PositionSaver : MonoBehaviour
         PlayerPrefs.SetFloat(GetKey("X"), transform.position.x);
         PlayerPrefs.SetFloat(GetKey("Y"), transform.position.y);
         PlayerPrefs.SetFloat(GetKey("Z"), transform.position.z);
+        PlayerPrefs.SetInt(GetKey("IsActive"), gameObject.activeSelf ? 1 : 0);
         PlayerPrefs.Save();
     }
 
@@ -39,6 +40,18 @@ public class PositionSaver : MonoBehaviour
             float z = PlayerPrefs.GetFloat(GetKey("Z"));
             transform.position = new Vector3(x, y, z);
         }
+
+        if (PlayerPrefs.HasKey(GetKey("IsActive")))
+        {
+            bool isActive = PlayerPrefs.GetInt(GetKey("IsActive")) == 1;
+            gameObject.SetActive(isActive);
+
+            if (!isActive)
+            {
+                PushableBox box = GetComponent<PushableBox>();
+                box.enabled = false;
+            }
+        }
     }
 
     // clear the saved positions, currently only here for when the reset button is pressed.
@@ -47,5 +60,6 @@ public class PositionSaver : MonoBehaviour
         PlayerPrefs.DeleteKey(GetKey("X"));
         PlayerPrefs.DeleteKey(GetKey("Y"));
         PlayerPrefs.DeleteKey(GetKey("Z"));
+        PlayerPrefs.DeleteKey(GetKey("IsActive"));
     }
 }
