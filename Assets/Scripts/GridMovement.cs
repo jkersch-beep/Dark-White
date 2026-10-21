@@ -15,6 +15,10 @@ public class GridMovement : MonoBehaviour
 
     void Update()
     {
+        //use these to clear player prefs
+        //PlayerPrefs.DeleteAll();
+        //PlayerPrefs.Save();
+
         var keyboard = Keyboard.current;
         // this is the player movement
         if (!isMoving)
