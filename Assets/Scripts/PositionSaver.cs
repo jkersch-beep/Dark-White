@@ -47,5 +47,11 @@ public class PositionSaver : MonoBehaviour
         PlayerPrefs.DeleteKey(GetKey("X"));
         PlayerPrefs.DeleteKey(GetKey("Y"));
         PlayerPrefs.DeleteKey(GetKey("Z"));
+
+        PushableBox box = GetComponent<PushableBox>();
+        box.enabled = true;
+
+        Collider2D col = GetComponent<Collider2D>();
+        col.isTrigger = false;
     }
 }

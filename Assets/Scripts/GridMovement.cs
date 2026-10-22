@@ -15,6 +15,10 @@ public class GridMovement : MonoBehaviour
 
     void Update()
     {
+        //use these to clear player prefs
+        //PlayerPrefs.DeleteAll();
+        //PlayerPrefs.Save();
+
         var keyboard = Keyboard.current;
         // this is the player movement
         if (!isMoving)
@@ -42,10 +46,18 @@ public class GridMovement : MonoBehaviour
         if (keyboard.leftCtrlKey.wasPressedThisFrame)
         {
             // clears the saved positions before the scene 
-            PositionSaver[] savers = FindObjectsByType<PositionSaver>(FindObjectsSortMode.None);
+            PositionSaver[] savers = FindObjectsByType<PositionSaver>(FindObjectsInactive.Include, FindObjectsSortMode.None);
             foreach (PositionSaver saver in savers)
             {
+                saver.gameObject.SetActive(true);
                 saver.ClearSaves();
+            }
+
+            Hole[] holes = FindObjectsByType<Hole>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+            foreach (Hole hole in holes)
+            {
+                hole.gameObject.SetActive(true);
+                hole.ClearHoleCount();
             }
             SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
         }
@@ -62,21 +74,35 @@ public class GridMovement : MonoBehaviour
         // checks if player is open to move or if something is in the way
         // ENSURE PLAYER AND OBJECTS HAVE COLLIDERS.
         Collider2D hitCollider = Physics2D.OverlapCircle(endPosition, 0.2f);
-        if (hitCollider != null && !hitCollider.isTrigger)
+        if (hitCollider != null)
         {
-            PushableBox box = hitCollider.GetComponent<PushableBox>();
-            // check if it is a box or a wall, and if it is possible to even be moved
-            if (box != null)
+            Hole hole = hitCollider.GetComponent<Hole>();
+            if (hole != null && !hole.IsFilled)
             {
-                bool succPush = box.TryPush(direction);
-                if (!succPush)
+                Collider2D boxCheck = Physics2D.OverlapCircle(startPosition + direction, 0.1f);
+                PushableBox box = (boxCheck != null) ? boxCheck.GetComponent<PushableBox>() : null;
+
+                if (box == null)
                 {
                     yield break;
                 }
             }
-            else
+            if (!hitCollider.isTrigger)
             {
-                yield break;
+                PushableBox box = hitCollider.GetComponent<PushableBox>();
+                // check if it is a box or a wall, and if it is possible to even be moved
+                if (box != null)
+                {
+                    bool succPush = box.TryPush(direction);
+                    if (!succPush)
+                    {
+                        yield break;
+                    }
+                }
+                else
+                {
+                    yield break;
+                }
             }
         }
 
