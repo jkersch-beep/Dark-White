@@ -29,6 +29,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/EntryHouse.unity
     guid: 9195e93d0b0b15b4c9aaf4faf03c4c36
+  - enabled: 1
+    path: Assets/Scenes/Kitchen.unity
+    guid: 6849a5961b0c56946af6aa8acf01a1e4
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
