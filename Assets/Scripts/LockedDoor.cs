@@ -12,12 +12,16 @@ public class LockedDoor : MonoBehaviour
     [SerializeField] private Collider2D interactionCollider;
     // Replacement object is not required, just optional.
     [SerializeField] private GameObject replacementObject;
+    [SerializeField] private GameObject InteractUI;
+    [SerializeField] private GameObject LockedMessage;
     private bool pathUnlocked = false;
     private static LockedDoor objectInRange;
 
     // Check if the door was already unlocked when entering scene. Unlock door if so.
     void Start()
     {
+        InteractUI.SetActive(false);
+        LockedMessage.SetActive(false);
         if (PlayerPrefs.GetInt(GetObjectSave(), 0) == 1)
         {
             UnlockOnStart();
@@ -42,7 +46,11 @@ public class LockedDoor : MonoBehaviour
             {
                 if (PlayerInventory.HasItem(itemIDRequired))
                 {
-                    Debug.Log("Press [E] to unlock");
+                    InteractUI.SetActive(true);
+                }
+                else
+                {
+                    LockedMessage.SetActive(true);
                 }
             }
         }
@@ -56,6 +64,8 @@ public class LockedDoor : MonoBehaviour
             if (objectInRange == this)
             {
                 objectInRange = null;
+                InteractUI.SetActive(false);
+                LockedMessage.SetActive(false);
             }
         }
     }
