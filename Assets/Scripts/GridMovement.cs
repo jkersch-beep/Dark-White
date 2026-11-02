@@ -15,10 +15,6 @@ public class GridMovement : MonoBehaviour
 
     void Update()
     {
-        //use these to clear player prefs
-        //PlayerPrefs.DeleteAll();
-        //PlayerPrefs.Save();
-
         var keyboard = Keyboard.current;
         // this is the player movement
         if (!isMoving)
@@ -60,6 +56,19 @@ public class GridMovement : MonoBehaviour
                 hole.ClearHoleCount();
             }
             SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
+        }
+
+        // keybind for interactions
+        if (keyboard.eKey.wasPressedThisFrame)
+        {
+            LockedDoor.TryInteractingWithObject();
+        }
+
+        //use these to clear player prefs (specifically for keys)
+        if (keyboard.rKey.wasPressedThisFrame)
+        {
+            PlayerPrefs.DeleteAll();
+            PlayerPrefs.Save();
         }
     }
 

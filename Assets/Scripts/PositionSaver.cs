@@ -2,6 +2,8 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+//I'll clean this up later. I originally was keeping player stuff in this before moving it to its own script.
+
 public class PositionSaver : MonoBehaviour
 {
     //Generate the objects id
@@ -14,10 +16,13 @@ public class PositionSaver : MonoBehaviour
         return $"{SceneManager.GetActiveScene().name}_{ObjectID}_{axis}";
     }
 
-    // to load the save position
+    // to load the save position. player is in start so that it loads last.
     private void Awake()
     {
-        LoadPosition();
+        if (!CompareTag("Player"))
+        {
+            LoadPosition();
+        }
     }
 
     // call to save the positions to the player preferences
@@ -37,7 +42,13 @@ public class PositionSaver : MonoBehaviour
             float x = PlayerPrefs.GetFloat(GetKey("X"));
             float y = PlayerPrefs.GetFloat(GetKey("Y"));
             float z = PlayerPrefs.GetFloat(GetKey("Z"));
-            transform.position = new Vector3(x, y, z);
+            Vector3 savedPosition = new Vector3(x, y, z);
+
+            if (CompareTag("Player"))
+            {
+                savedPosition = OffsetPosition(savedPosition);
+            }
+            transform.position = savedPosition;
         }
     }
 
@@ -49,9 +60,43 @@ public class PositionSaver : MonoBehaviour
         PlayerPrefs.DeleteKey(GetKey("Z"));
 
         PushableBox box = GetComponent<PushableBox>();
-        box.enabled = true;
+        if (box != null)
+        {
+            box.enabled = true;
+        }
 
         Collider2D col = GetComponent<Collider2D>();
         col.isTrigger = false;
+    }
+
+    // Offset players position on revisiting the scene.
+    private Vector3 OffsetPosition(Vector3 target)
+    {
+        float gridSize = 1f;
+
+        if (IsBlocked(target))
+        {
+            Vector2[] directions = {Vector2.down, Vector2.left, Vector2.right, Vector2.up};
+            foreach (Vector2 d in directions)
+            {
+                Vector2 toPos = (Vector2)target + (d * gridSize);
+                if (!IsBlocked(toPos))
+                {
+                    return toPos;
+                }
+            }
+        }
+        return target;
+    }
+
+    private bool IsBlocked(Vector2 posCheck)
+    {
+        Collider2D hit = Physics2D.OverlapCircle(posCheck, 0.2f);
+
+        if (hit != null)
+        {
+            return true;
+        }
+        return false;
     }
 }
