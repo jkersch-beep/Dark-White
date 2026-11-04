@@ -3808,7 +3808,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6986988434861108263, guid: cb316217a6790cc469867b37f16dc8a4, type: 3}
       propertyPath: sceneToLoad
-      value: Seth_Level1
+      value: Kitchen
       objectReference: {fileID: 0}
     - target: {fileID: 8296197444979156968, guid: cb316217a6790cc469867b37f16dc8a4, type: 3}
       propertyPath: m_SortingLayer
