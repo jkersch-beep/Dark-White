@@ -4246,7 +4246,7 @@ PrefabInstance:
       objectReference: {fileID: 378940076}
     - target: {fileID: 8502391126468934699, guid: 6905f1b7f9262af42985271faa289792, type: 3}
       propertyPath: itemIDRequired
-      value: StudyKey
+      value: blank
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
