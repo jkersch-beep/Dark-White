@@ -524,6 +524,22 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3676648617416352759, guid: 33415ac61abd50643bd1284418ccf6a6, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -6813231576852202687, guid: a1630ca6fea07704fb65285c992a7cb0, type: 3}
+    - target: {fileID: 3676648617416352759, guid: 33415ac61abd50643bd1284418ccf6a6, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3676648617416352759, guid: 33415ac61abd50643bd1284418ccf6a6, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3676648617416352759, guid: 33415ac61abd50643bd1284418ccf6a6, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3676648617416352759, guid: 33415ac61abd50643bd1284418ccf6a6, type: 3}
       propertyPath: m_SortingOrder
       value: 1
       objectReference: {fileID: 0}
@@ -572,7 +588,8 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 1593011243841113510, guid: 33415ac61abd50643bd1284418ccf6a6, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 33415ac61abd50643bd1284418ccf6a6, type: 3}
@@ -1054,7 +1071,7 @@ MonoBehaviour:
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
-  m_ApplyToSortingLayers: 00000000
+  m_ApplyToSortingLayers: 000000005d262cebad71b0189fb44ac6430e2630eb2d522f
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
