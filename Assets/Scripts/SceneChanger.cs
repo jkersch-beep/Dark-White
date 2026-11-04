@@ -20,6 +20,12 @@ public class SceneChanger : MonoBehaviour
                 saver.SavePosition();
             }
 
+            PlayerPositionSaver playerSaver = collision.GetComponent<PlayerPositionSaver>();
+            if (playerSaver != null)
+            {
+                playerSaver.SavePosition();
+            }
+
             SceneManager.LoadScene(sceneToLoad);
         }
     }
