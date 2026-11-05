@@ -43,6 +43,21 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Floor&Walls
+    uniqueID: 3945539165
+    locked: 0
+  - name: Decor
+    uniqueID: 414216621
+    locked: 0
+  - name: Boxes
+    uniqueID: 3326784671
+    locked: 0
+  - name: Player_NPCs
+    uniqueID: 807800387
+    locked: 0
+  - name: Items
+    uniqueID: 793914859
+    locked: 0
   m_RenderingLayers:
   - Default
   - player
