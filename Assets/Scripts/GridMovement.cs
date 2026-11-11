@@ -62,6 +62,7 @@ public class GridMovement : MonoBehaviour
         if (keyboard.eKey.wasPressedThisFrame)
         {
             LockedDoor.TryInteractingWithObject();
+            ItemSceneLoad.TryInteractingWithObject();
         }
 
         //use these to clear player prefs (specifically for keys)

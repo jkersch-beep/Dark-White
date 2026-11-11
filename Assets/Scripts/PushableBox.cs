@@ -17,6 +17,11 @@ public class PushableBox : MonoBehaviour
     // check if the box has already stuck to another one
     private bool isStuck = false;
 
+    private void Start()
+    {
+        CheckAdjacentBoxes();
+    }
+
     public bool TryPush(Vector2 direction)
     {
         // check if the box is already moving (ensuring a box isnt accidentally pushed twice by the player)
@@ -45,15 +50,9 @@ public class PushableBox : MonoBehaviour
                 if (otherBox != null)
                 {
                     // 1: checks if box is connected, 2: stick if not currently stuck, 3: stop movement.
-                    if (otherBox.FindLeader() == this)
+                    if (otherBox.FindLeader() == this.FindLeader())
                     {
                         continue;
-                    }
-
-                    if (!isStuck)
-                    {
-                        StickToBox(otherBox);
-                        return false;
                     }
                 }
                 return false;
@@ -88,6 +87,9 @@ public class PushableBox : MonoBehaviour
 
         // here to ensure movement was to the right spot
         transform.position = endPosition;
+        
+        //Stick to nearby boxes
+        CheckAdjacentBoxes();
 
         // keep at the end
         foreach (var box in groupBoxes)
@@ -122,5 +124,26 @@ public class PushableBox : MonoBehaviour
             }
         }
         return current.GetComponent<PushableBox>();
+    }
+
+    private void CheckAdjacentBoxes()
+    {
+        Vector2[] directions = {Vector2.down, Vector2.left, Vector2.right, Vector2.up};
+        foreach (Vector2 d in directions)
+        {
+            Vector2 toPos = (Vector2)transform.position + (d * gridSize);
+            Collider2D hit = Physics2D.OverlapCircle(toPos, 0.2f, whatStopsBox);
+            if (hit != null && !hit.isTrigger)
+            {
+                if (hit.CompareTag("Box"))
+                {
+                    PushableBox otherBox = hit.GetComponent<PushableBox>();
+                    if (this.FindLeader() != otherBox.FindLeader())
+                    {
+                        StickToBox(otherBox);
+                    }
+                }
+            }
+        }
     }
 }
