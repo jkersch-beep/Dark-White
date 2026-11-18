@@ -4,11 +4,8 @@ using UnityEngine.SceneManagement;
 
 public class Hole : MonoBehaviour
 {
-
-    // CURRENT KNOWN ISSUE: NEED TO ADJUST HOLE TO DEAL WITH BOXES STUCK TOGETHER
-
     // Count boxes, check for if a hole is filled, etc.
-    [SerializeField] private int boxesRequired = 2;
+    [SerializeField] private int boxesRequired = 1;
     private int boxesAdded = 0;
     public bool isFilled = false;
     public bool IsFilled => isFilled;
@@ -22,8 +19,13 @@ public class Hole : MonoBehaviour
         foreach (var hit in hits)
         {
             PushableBox box = hit.GetComponent<PushableBox>();
-            if (box != null && box.enabled)
+            //Sort whether or not the box is connected or not when passing the hole
+            if (box != null && box.enabled && !box.IsMoving)
             {
+                if (box.HasConnectedNeighbors())
+                {
+                    continue;
+                }
                 FillHole(box);
                 break;
             }

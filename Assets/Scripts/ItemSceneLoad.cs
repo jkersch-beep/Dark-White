@@ -12,6 +12,7 @@ public class ItemSceneLoad : MonoBehaviour
     [SerializeField] private Collider2D interactionCollider;
     [SerializeField] private GameObject InteractUI;
     [SerializeField] private GameObject LockedMessage;
+    [SerializeField] private Vector2 targetSpawnPos;
     private static ItemSceneLoad objectInRange;
     public string sceneToLoad;
     private bool pathUnlocked = false;
@@ -75,11 +76,11 @@ public class ItemSceneLoad : MonoBehaviour
                 saver.SavePosition();
             }
 
-            PlayerPositionSaver playerSaver = FindFirstObjectByType<PlayerPositionSaver>();
-            if (playerSaver != null)
-            {
-                playerSaver.SavePosition();
-            }
+            PlayerPrefs.SetFloat("TargetSpawnX", targetSpawnPos.x);
+            PlayerPrefs.SetFloat("TargetSpawnY", targetSpawnPos.y);
+            PlayerPrefs.Save();
+
+            SceneManager.LoadScene(sceneToLoad);
 
             SceneManager.LoadScene(sceneToLoad);
         }
