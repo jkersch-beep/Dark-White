@@ -175,6 +175,14 @@ PrefabInstance:
       propertyPath: sceneToLoad
       value: testing
       objectReference: {fileID: 0}
+    - target: {fileID: 6986988434861108263, guid: cb316217a6790cc469867b37f16dc8a4, type: 3}
+      propertyPath: targetSpawnPos.x
+      value: -3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6986988434861108263, guid: cb316217a6790cc469867b37f16dc8a4, type: 3}
+      propertyPath: targetSpawnPos.y
+      value: 0.4999999
+      objectReference: {fileID: 0}
     - target: {fileID: 8613223111626263022, guid: cb316217a6790cc469867b37f16dc8a4, type: 3}
       propertyPath: m_Size.x
       value: 0.01

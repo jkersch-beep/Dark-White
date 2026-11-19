@@ -1,7 +1,6 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-
-// partially reuses stuff from GridMovement.cs
 
 public class PushableBox : MonoBehaviour
 {
@@ -14,8 +13,15 @@ public class PushableBox : MonoBehaviour
     private bool isMoving = false;
     // THIS IS FOR LAYERS. CURRENT LOGIC IS THAT WALL AND BOX ARE IN THE SAME LAYER, CAN ADJUST IF WE NEED.
     [SerializeField] private LayerMask whatStopsBox;
-    // check if the box has already stuck to another one
-    private bool isStuck = false;
+
+    // These are added so that Hole.cs can check info.
+    public bool IsMoving => isMoving;
+    public bool HasConnectedNeighbors()
+    {
+        List<PushableBox> group = new List<PushableBox>();
+        CheckAdjacentBoxes(group);
+        return group.Count > 1;
+    }
 
     public bool TryPush(Vector2 direction)
     {
@@ -25,102 +31,97 @@ public class PushableBox : MonoBehaviour
             return false;
         }
 
-        // Create a leader for connected boxes so that they move together
-        PushableBox leader = FindLeader();
-        if (leader != this)
-        {
-            return leader.TryPush(direction);
-        }
+        // Put all connected boxes into a list
+        List<PushableBox> group = new List<PushableBox>();
+        CheckAdjacentBoxes(group);
 
-        // Each box has an individual path check then determines movement.
-        PushableBox[] groupBoxes = GetComponentsInChildren<PushableBox>();
-        foreach (var box in groupBoxes)
+        // Check box paths before movement
+        foreach (var box in group)
         {
             Vector2 targetPosition = (Vector2)box.transform.position + (direction * gridSize);
             Collider2D collider = Physics2D.OverlapCircle(targetPosition, 0.2f, whatStopsBox);
-
-            if (collider != null && !collider.isTrigger)
+            if (collider != null)
             {
                 PushableBox otherBox = collider.GetComponent<PushableBox>();
-                if (otherBox != null)
-                {
-                    // 1: checks if box is connected, 2: stick if not currently stuck, 3: stop movement.
-                    if (otherBox.FindLeader() == this)
-                    {
-                        continue;
-                    }
-
-                    if (!isStuck)
-                    {
-                        StickToBox(otherBox);
-                        return false;
-                    }
+                if (otherBox != null && group.Contains(otherBox))
+                 {
+                    continue;
                 }
                 return false;
             }
         }
-        StartCoroutine(Move(direction));
+
+        // the box moves
+        StartCoroutine(Move(group, direction));
         return true;
     }
 
     // this is for the actual grid movement
-    private IEnumerator Move(Vector3 direction)
+    private IEnumerator Move(List<PushableBox> group, Vector2 direction)
     {
-        PushableBox[] groupBoxes = GetComponentsInChildren<PushableBox>();
-        foreach (var box in groupBoxes)
+        // Set all boxes to moving
+        foreach (var box in group)
         {
             box.isMoving = true;
         }
 
-        // check for current location and destination
-        Vector3 startPosition = transform.position;
-        Vector3 endPosition = startPosition + (direction * gridSize);
+        // Get the box positions and save them
+        Dictionary<PushableBox, Vector3> startPositions = new Dictionary<PushableBox, Vector3>();
+        Dictionary<PushableBox, Vector3> endPositions = new Dictionary<PushableBox, Vector3>();
 
-        // the actual movement happening
+        foreach (var box in group)
+        {
+            startPositions[box] = box.transform.position;
+            endPositions[box] = startPositions[box] + (Vector3)(direction * gridSize);
+        }
+
         float elapsedTime = 0;
         while (elapsedTime < moveDuration)
         {
             elapsedTime += Time.deltaTime;
             float percent = elapsedTime / moveDuration;
-            transform.position = Vector3.Lerp(startPosition, endPosition, percent);
+
+            foreach (var box in group)
+            {
+                box.transform.position = Vector3.Lerp(startPositions[box], endPositions[box], percent);
+            }
             yield return null;
         }
 
-        // here to ensure movement was to the right spot
-        transform.position = endPosition;
-
-        // keep at the end
-        foreach (var box in groupBoxes)
+        foreach (var box in group)
         {
+            box.transform.position = endPositions[box];
             box.isMoving = false;
         }
     }
 
-    // Combine two boxes and mark as stuck
-    private void StickToBox(PushableBox target)
+    // Box list management (i realize the name i gave this doesnt make sense anymore, im just too lazy to go back and change it since its working ngl)
+    private void CheckAdjacentBoxes(List<PushableBox> groupToFill)
     {
-        this.isStuck = true;
-        target.isStuck = true;
-
-        PushableBox targetLeader = target.FindLeader();
-        transform.SetParent(targetLeader.transform, true);
-    }
-
-    // Determine the leader of a box group
-    private PushableBox FindLeader()
-    {
-        Transform current = transform;
-        while (current.parent != null)
+        if (groupToFill.Contains(this))
         {
-            PushableBox leader = current.parent.GetComponent<PushableBox>();
-            if (leader != null)
+            return;
+        }
+
+        groupToFill.Add(this);
+
+
+        Vector2[] directions = {Vector2.down, Vector2.left, Vector2.right, Vector2.up};
+        foreach (Vector2 d in directions)
+        {
+            Vector2 toPos = (Vector2)transform.position + (d * gridSize);
+            Collider2D collider = Physics2D.OverlapCircle(toPos, 0.2f, whatStopsBox);
+            if (collider != null && !collider.isTrigger)
             {
-                current = current.parent;
-            } else
-            {
-                break;
+                if (collider.CompareTag("Box"))
+                {
+                    PushableBox otherBox = collider.GetComponent<PushableBox>();
+                    if (otherBox != null)
+                    {
+                        otherBox.CheckAdjacentBoxes(groupToFill);
+                    }
+                }
             }
         }
-        return current.GetComponent<PushableBox>();
     }
 }

@@ -7,6 +7,7 @@ public class LockedDoor : MonoBehaviour
     [SerializeField] private string pathID = "TestingDoor";
     // MATCH THIS TO THE ITEM THAT IS PICKED UP AND REQUIRED FOR THE DOOR
     [SerializeField] private string itemIDRequired = "TestingKey";
+    //not required, just optional.
     [SerializeField] private GameObject objectBlocking;
     // Also make sure to set this script on the interaction collider.
     [SerializeField] private Collider2D interactionCollider;
@@ -31,6 +32,10 @@ public class LockedDoor : MonoBehaviour
             if (replacementObject != null)
             {
                 replacementObject.SetActive(false);
+            }
+            if (objectBlocking != null)
+            {
+                objectBlocking.SetActive(true);
             }
         }
     }
@@ -97,10 +102,13 @@ public class LockedDoor : MonoBehaviour
     {
         pathUnlocked = true;
         interactionCollider.enabled = false;
-        objectBlocking.SetActive(false);
         if (replacementObject != null)
         {
             replacementObject.SetActive(true);
+        }
+        if (objectBlocking != null)
+        {
+            objectBlocking.SetActive(false);
         }
     }
 

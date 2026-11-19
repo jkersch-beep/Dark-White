@@ -7,6 +7,7 @@ public class SceneChanger : MonoBehaviour
     // Make sure to add all new scenes to the scene list
     // Do this by going to File -> Build Profiles -> Open Scene List -> Add Open Scenes
     public string sceneToLoad;
+    [SerializeField] private Vector2 targetSpawnPos;
 
     //Set the 'scene to load' in the script after attatching it to the TP
     private void OnTriggerEnter2D(Collider2D collision)
@@ -20,11 +21,9 @@ public class SceneChanger : MonoBehaviour
                 saver.SavePosition();
             }
 
-            PlayerPositionSaver playerSaver = collision.GetComponent<PlayerPositionSaver>();
-            if (playerSaver != null)
-            {
-                playerSaver.SavePosition();
-            }
+            PlayerPrefs.SetFloat("TargetSpawnX", targetSpawnPos.x);
+            PlayerPrefs.SetFloat("TargetSpawnY", targetSpawnPos.y);
+            PlayerPrefs.Save();
 
             SceneManager.LoadScene(sceneToLoad);
         }

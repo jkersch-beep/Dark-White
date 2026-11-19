@@ -1,9 +1,6 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
-//I'll clean this up later. I originally was keeping player stuff in this before moving it to its own script.
-
 public class PositionSaver : MonoBehaviour
 {
     //Generate the objects id
@@ -19,10 +16,7 @@ public class PositionSaver : MonoBehaviour
     // to load the save position. player is in start so that it loads last.
     private void Awake()
     {
-        if (!CompareTag("Player"))
-        {
-            LoadPosition();
-        }
+        LoadPosition();
     }
 
     // call to save the positions to the player preferences
@@ -43,11 +37,6 @@ public class PositionSaver : MonoBehaviour
             float y = PlayerPrefs.GetFloat(GetKey("Y"));
             float z = PlayerPrefs.GetFloat(GetKey("Z"));
             Vector3 savedPosition = new Vector3(x, y, z);
-
-            if (CompareTag("Player"))
-            {
-                savedPosition = OffsetPosition(savedPosition);
-            }
             transform.position = savedPosition;
         }
     }
@@ -67,36 +56,5 @@ public class PositionSaver : MonoBehaviour
 
         Collider2D col = GetComponent<Collider2D>();
         col.isTrigger = false;
-    }
-
-    // Offset players position on revisiting the scene.
-    private Vector3 OffsetPosition(Vector3 target)
-    {
-        float gridSize = 1f;
-
-        if (IsBlocked(target))
-        {
-            Vector2[] directions = {Vector2.down, Vector2.left, Vector2.right, Vector2.up};
-            foreach (Vector2 d in directions)
-            {
-                Vector2 toPos = (Vector2)target + (d * gridSize);
-                if (!IsBlocked(toPos))
-                {
-                    return toPos;
-                }
-            }
-        }
-        return target;
-    }
-
-    private bool IsBlocked(Vector2 posCheck)
-    {
-        Collider2D hit = Physics2D.OverlapCircle(posCheck, 0.2f);
-
-        if (hit != null)
-        {
-            return true;
-        }
-        return false;
     }
 }

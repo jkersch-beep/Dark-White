@@ -2,9 +2,6 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
-
-// I CURRENTLY HAVE MADE TEST PREFABS FOR THE PLAYER, WALL, AND BOXES TO HELP SHOWCASE THE CURRENT SETUP.
-
 public class GridMovement : MonoBehaviour
 {
     // time the movement takes (can change if we want)
@@ -62,6 +59,7 @@ public class GridMovement : MonoBehaviour
         if (keyboard.eKey.wasPressedThisFrame)
         {
             LockedDoor.TryInteractingWithObject();
+            ItemSceneLoad.TryInteractingWithObject();
         }
 
         //use these to clear player prefs (specifically for keys)
@@ -82,36 +80,61 @@ public class GridMovement : MonoBehaviour
 
         // checks if player is open to move or if something is in the way
         // ENSURE PLAYER AND OBJECTS HAVE COLLIDERS.
-        Collider2D hitCollider = Physics2D.OverlapCircle(endPosition, 0.2f);
-        if (hitCollider != null)
+        Collider2D[] hits = Physics2D.OverlapCircleAll(endPosition, 0.2f);
+
+        Hole targetHole = null;
+        PushableBox targetBox = null;
+        bool hasSolidObstacle = false;
+
+        foreach (var hit in hits)
         {
-            Hole hole = hitCollider.GetComponent<Hole>();
+            if (hit == null)
+            {
+                continue;
+            }
+
+            Hole hole = hit.GetComponent<Hole>();
             if (hole != null && !hole.IsFilled)
             {
-                Collider2D boxCheck = Physics2D.OverlapCircle(startPosition + direction, 0.1f);
-                PushableBox box = (boxCheck != null) ? boxCheck.GetComponent<PushableBox>() : null;
-
-                if (box == null)
-                {
-                    yield break;
-                }
+                targetHole = hole;
             }
-            if (!hitCollider.isTrigger)
+
+            PushableBox box = hit.GetComponent<PushableBox>();
+            if (box != null)
             {
-                PushableBox box = hitCollider.GetComponent<PushableBox>();
-                // check if it is a box or a wall, and if it is possible to even be moved
-                if (box != null)
-                {
-                    bool succPush = box.TryPush(direction);
-                    if (!succPush)
-                    {
-                        yield break;
-                    }
-                }
-                else
-                {
-                    yield break;
-                }
+                targetBox = box;
+            }
+            else if (!hit.isTrigger && targetHole == null)
+            {
+                hasSolidObstacle = true;
+            }
+
+        }
+
+        if (hasSolidObstacle)
+        {
+            yield break;
+        }
+
+        if (targetHole != null)
+        {
+            if (targetBox == null)
+            {
+                yield break;
+            }
+            else
+            {
+                bool succPush = targetBox.TryPush(direction);
+                yield break;
+            }
+        }
+
+        if (targetBox != null)
+        {
+            bool succPush = targetBox.TryPush(direction);
+            if (!succPush)
+            {
+                yield break;
             }
         }
 
