@@ -15,7 +15,13 @@ public class ItemSceneLoad : MonoBehaviour
     [SerializeField] private Vector2 targetSpawnPos;
     private static ItemSceneLoad objectInRange;
     public string sceneToLoad;
-    private bool pathUnlocked = false;
+    private bool RequiresKey => !string.IsNullOrWhiteSpace(itemIDRequired);
+
+    private void Start()
+    {
+        InteractUI.SetActive(false);
+        LockedMessage.SetActive(false);
+    }
 
     // Detect when the player enters the interaction collider. Pop up with the message to unlock and allow unlocking.
     private void OnTriggerEnter2D(Collider2D other)
@@ -24,16 +30,13 @@ public class ItemSceneLoad : MonoBehaviour
         {
             objectInRange = this;
 
-            if (!pathUnlocked)
+            if (!RequiresKey || PlayerInventory.HasItem(itemIDRequired))
             {
-                if (PlayerInventory.HasItem(itemIDRequired))
-                {
-                    InteractUI.SetActive(true);
-                }
-                else
-                {
-                    LockedMessage.SetActive(true);
-                }
+                InteractUI.SetActive(true);
+            }
+            else
+            {
+                LockedMessage.SetActive(true);
             }
         }
     }
@@ -43,7 +46,6 @@ public class ItemSceneLoad : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            if (objectInRange == this)
             {
                 objectInRange = null;
                 InteractUI.SetActive(false);
@@ -64,11 +66,8 @@ public class ItemSceneLoad : MonoBehaviour
     // Check if the player has the key and can unlock the door. TP after if so.
     private void TryUnlock()
     {
-        if (pathUnlocked) return;
-        if (PlayerInventory.HasItem(itemIDRequired))
+        if (!RequiresKey || PlayerInventory.HasItem(itemIDRequired))
         {
-            pathUnlocked = true;
-            interactionCollider.enabled = false;
             // this is to save the position before the new scene is loaded
             PositionSaver[] savers = FindObjectsByType<PositionSaver>(FindObjectsSortMode.None);
             foreach (PositionSaver saver in savers)
@@ -79,8 +78,6 @@ public class ItemSceneLoad : MonoBehaviour
             PlayerPrefs.SetFloat("TargetSpawnX", targetSpawnPos.x);
             PlayerPrefs.SetFloat("TargetSpawnY", targetSpawnPos.y);
             PlayerPrefs.Save();
-
-            SceneManager.LoadScene(sceneToLoad);
 
             SceneManager.LoadScene(sceneToLoad);
         }

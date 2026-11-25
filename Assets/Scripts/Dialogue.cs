@@ -54,7 +54,7 @@ public class Dialogue : MonoBehaviour
 
     IEnumerator TypeLine()
     {
-        // Type each character 1 by 1
+        // Types each character 1 by 1
         foreach (char c in lines[index].ToCharArray())
         {
             textComponent.text += c;

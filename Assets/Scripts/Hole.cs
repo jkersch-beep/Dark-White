@@ -43,6 +43,13 @@ public class Hole : MonoBehaviour
         box.enabled = false;
         Collider2D boxCollider = box.GetComponent<Collider2D>();
         boxCollider.isTrigger = true;
+        // disabling like everything about the box once its in a hole (IF THIS CAUSES ISSUES LET ME KNOW!)
+        SpriteRenderer boxSprite = box.GetComponent<SpriteRenderer>();
+        boxSprite.enabled = false;
+        box.tag = "Untagged";
+        box.enabled = false;
+        boxCollider.enabled = false;
+        boxSprite.sortingLayerName = "Floor&Walls";
         //permanently fill hole if enough boxes have been added
         if (boxesAdded >= boxesRequired)
         {

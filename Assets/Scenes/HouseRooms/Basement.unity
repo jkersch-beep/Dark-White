@@ -203,7 +203,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1767705613659287567, guid: bc83752e90ab87043aa7986b3a8526aa, type: 3}
       propertyPath: m_Name
-      value: Box (5)
+      value: Candle1 Box2
       objectReference: {fileID: 0}
     - target: {fileID: 1767705613659287567, guid: bc83752e90ab87043aa7986b3a8526aa, type: 3}
       propertyPath: m_TagString
@@ -807,9 +807,9 @@ Transform:
   - {fileID: 1223771412}
   - {fileID: 549481125}
   - {fileID: 2051556887}
-  - {fileID: 1105366770}
-  - {fileID: 1294640923}
   - {fileID: 175675782}
+  - {fileID: 1294640923}
+  - {fileID: 1105366770}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &266235340
@@ -3080,7 +3080,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 266235342}
-  - {fileID: 1554983023}
   - {fileID: 259741573}
   - {fileID: 1556829996}
   - {fileID: 672623912}
@@ -3092,6 +3091,7 @@ Transform:
   - {fileID: 1878116783}
   - {fileID: 632749312}
   - {fileID: 544610138}
+  - {fileID: 1554983023}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1052163748
@@ -3104,7 +3104,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1767705613659287567, guid: bc83752e90ab87043aa7986b3a8526aa, type: 3}
       propertyPath: m_Name
-      value: Box (6)
+      value: Candle2 Box2
       objectReference: {fileID: 0}
     - target: {fileID: 1767705613659287567, guid: bc83752e90ab87043aa7986b3a8526aa, type: 3}
       propertyPath: m_TagString
@@ -3240,6 +3240,14 @@ PrefabInstance:
       propertyPath: sceneToLoad
       value: EntryHouse
       objectReference: {fileID: 0}
+    - target: {fileID: 6986988434861108263, guid: cb316217a6790cc469867b37f16dc8a4, type: 3}
+      propertyPath: targetSpawnPos.x
+      value: 8.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6986988434861108263, guid: cb316217a6790cc469867b37f16dc8a4, type: 3}
+      propertyPath: targetSpawnPos.y
+      value: -3.5
+      objectReference: {fileID: 0}
     - target: {fileID: 8296197444979156968, guid: cb316217a6790cc469867b37f16dc8a4, type: 3}
       propertyPath: m_SortingLayer
       value: 1
@@ -3365,12 +3373,12 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1971048412}
-  - {fileID: 1572310568}
   - {fileID: 1154274583}
   - {fileID: 931581710}
   - {fileID: 998042530}
   - {fileID: 1244297498}
+  - {fileID: 1971048412}
+  - {fileID: 1572310568}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1186892312
@@ -4094,13 +4102,13 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 375765612}
-  - {fileID: 1848297939}
   - {fileID: 1892084331}
   - {fileID: 285319187}
   - {fileID: 733634998}
   - {fileID: 2009937904}
   - {fileID: 1607982647}
+  - {fileID: 375765612}
+  - {fileID: 1848297939}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1476731985
@@ -4891,7 +4899,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1767705613659287567, guid: bc83752e90ab87043aa7986b3a8526aa, type: 3}
       propertyPath: m_Name
-      value: Box (6)
+      value: Candle3 Box2
       objectReference: {fileID: 0}
     - target: {fileID: 1767705613659287567, guid: bc83752e90ab87043aa7986b3a8526aa, type: 3}
       propertyPath: m_TagString
@@ -5393,7 +5401,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1767705613659287567, guid: bc83752e90ab87043aa7986b3a8526aa, type: 3}
       propertyPath: m_Name
-      value: Box (4)
+      value: Candle1 Box1
       objectReference: {fileID: 0}
     - target: {fileID: 1767705613659287567, guid: bc83752e90ab87043aa7986b3a8526aa, type: 3}
       propertyPath: m_TagString
@@ -5734,7 +5742,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1767705613659287567, guid: bc83752e90ab87043aa7986b3a8526aa, type: 3}
       propertyPath: m_Name
-      value: Box (5)
+      value: Candle3 Box1
       objectReference: {fileID: 0}
     - target: {fileID: 1767705613659287567, guid: bc83752e90ab87043aa7986b3a8526aa, type: 3}
       propertyPath: m_TagString
@@ -6515,7 +6523,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1767705613659287567, guid: bc83752e90ab87043aa7986b3a8526aa, type: 3}
       propertyPath: m_Name
-      value: Box (5)
+      value: Candle2 Box1
       objectReference: {fileID: 0}
     - target: {fileID: 1767705613659287567, guid: bc83752e90ab87043aa7986b3a8526aa, type: 3}
       propertyPath: m_TagString

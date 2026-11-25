@@ -169,6 +169,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Box (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 1767705613659287567, guid: bc83752e90ab87043aa7986b3a8526aa, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 4075556924194498107, guid: bc83752e90ab87043aa7986b3a8526aa, type: 3}
       propertyPath: m_SortingLayer
       value: 3
@@ -957,6 +961,14 @@ PrefabInstance:
       propertyPath: sceneToLoad
       value: Kitchen
       objectReference: {fileID: 0}
+    - target: {fileID: 6986988434861108263, guid: cb316217a6790cc469867b37f16dc8a4, type: 3}
+      propertyPath: targetSpawnPos.x
+      value: 7.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6986988434861108263, guid: cb316217a6790cc469867b37f16dc8a4, type: 3}
+      propertyPath: targetSpawnPos.y
+      value: -1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 8296197444979156968, guid: cb316217a6790cc469867b37f16dc8a4, type: 3}
       propertyPath: m_SortingLayer
       value: 3
@@ -1147,6 +1159,10 @@ PrefabInstance:
     - target: {fileID: 1767705613659287567, guid: bc83752e90ab87043aa7986b3a8526aa, type: 3}
       propertyPath: m_Name
       value: Box (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1767705613659287567, guid: bc83752e90ab87043aa7986b3a8526aa, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 4075556924194498107, guid: bc83752e90ab87043aa7986b3a8526aa, type: 3}
       propertyPath: m_SortingLayer
@@ -1849,6 +1865,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Box (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 1767705613659287567, guid: bc83752e90ab87043aa7986b3a8526aa, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 4075556924194498107, guid: bc83752e90ab87043aa7986b3a8526aa, type: 3}
       propertyPath: m_SortingLayer
       value: 3
@@ -2368,6 +2388,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Box (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1767705613659287567, guid: bc83752e90ab87043aa7986b3a8526aa, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 4075556924194498107, guid: bc83752e90ab87043aa7986b3a8526aa, type: 3}
       propertyPath: m_SortingLayer
       value: 3
@@ -2858,6 +2882,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Box
       objectReference: {fileID: 0}
+    - target: {fileID: 1767705613659287567, guid: bc83752e90ab87043aa7986b3a8526aa, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 4075556924194498107, guid: bc83752e90ab87043aa7986b3a8526aa, type: 3}
       propertyPath: m_SortingLayer
       value: 3
@@ -2972,6 +3000,14 @@ PrefabInstance:
       propertyPath: sceneToLoad
       value: EntryHouse
       objectReference: {fileID: 0}
+    - target: {fileID: 6986988434861108263, guid: cb316217a6790cc469867b37f16dc8a4, type: 3}
+      propertyPath: targetSpawnPos.x
+      value: -8.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6986988434861108263, guid: cb316217a6790cc469867b37f16dc8a4, type: 3}
+      propertyPath: targetSpawnPos.y
+      value: -1.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2988,6 +3024,10 @@ PrefabInstance:
     - target: {fileID: 1767705613659287567, guid: bc83752e90ab87043aa7986b3a8526aa, type: 3}
       propertyPath: m_Name
       value: Box (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1767705613659287567, guid: bc83752e90ab87043aa7986b3a8526aa, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 4075556924194498107, guid: bc83752e90ab87043aa7986b3a8526aa, type: 3}
       propertyPath: m_SortingLayer
@@ -3058,6 +3098,10 @@ PrefabInstance:
     - target: {fileID: 1767705613659287567, guid: bc83752e90ab87043aa7986b3a8526aa, type: 3}
       propertyPath: m_Name
       value: Box (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1767705613659287567, guid: bc83752e90ab87043aa7986b3a8526aa, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 4075556924194498107, guid: bc83752e90ab87043aa7986b3a8526aa, type: 3}
       propertyPath: m_SortingLayer

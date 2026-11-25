@@ -17,6 +17,7 @@ public class LockedDoor : MonoBehaviour
     [SerializeField] private GameObject LockedMessage;
     private bool pathUnlocked = false;
     private static LockedDoor objectInRange;
+    private bool RequiresKey => !string.IsNullOrWhiteSpace(itemIDRequired);
 
     // Check if the door was already unlocked when entering scene. Unlock door if so.
     void Start()
@@ -49,7 +50,7 @@ public class LockedDoor : MonoBehaviour
 
             if (!pathUnlocked)
             {
-                if (PlayerInventory.HasItem(itemIDRequired))
+                if (!RequiresKey || PlayerInventory.HasItem(itemIDRequired))
                 {
                     InteractUI.SetActive(true);
                 }
@@ -88,7 +89,7 @@ public class LockedDoor : MonoBehaviour
     private void TryUnlock()
     {
         if (pathUnlocked) return;
-        if (PlayerInventory.HasItem(itemIDRequired))
+        if (!RequiresKey || PlayerInventory.HasItem(itemIDRequired))
         {
             pathUnlocked = true;
             PlayerPrefs.SetInt(GetObjectSave(), 1);

@@ -118,15 +118,7 @@ public class GridMovement : MonoBehaviour
 
         if (targetHole != null)
         {
-            if (targetBox == null)
-            {
-                yield break;
-            }
-            else
-            {
-                bool succPush = targetBox.TryPush(direction);
-                yield break;
-            }
+            yield break;
         }
 
         if (targetBox != null)

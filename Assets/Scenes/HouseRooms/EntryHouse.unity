@@ -2596,6 +2596,14 @@ PrefabInstance:
       propertyPath: sceneToLoad
       value: UnpackedRoom
       objectReference: {fileID: 0}
+    - target: {fileID: 6986988434861108263, guid: cb316217a6790cc469867b37f16dc8a4, type: 3}
+      propertyPath: targetSpawnPos.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6986988434861108263, guid: cb316217a6790cc469867b37f16dc8a4, type: 3}
+      propertyPath: targetSpawnPos.y
+      value: -8.5
+      objectReference: {fileID: 0}
     - target: {fileID: 8296197444979156968, guid: cb316217a6790cc469867b37f16dc8a4, type: 3}
       propertyPath: m_SortingLayer
       value: 1
@@ -3764,6 +3772,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -7960769186747087027, guid: 33415ac61abd50643bd1284418ccf6a6, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 0.5466667
+      objectReference: {fileID: 0}
+    - target: {fileID: -7960769186747087027, guid: 33415ac61abd50643bd1284418ccf6a6, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2
+      objectReference: {fileID: 0}
     - target: {fileID: 644003163551936538, guid: 33415ac61abd50643bd1284418ccf6a6, type: 3}
       propertyPath: moveDuration
       value: 0.15
@@ -4082,6 +4098,14 @@ PrefabInstance:
       propertyPath: sceneToLoad
       value: Seth_Level1
       objectReference: {fileID: 0}
+    - target: {fileID: 6986988434861108263, guid: cb316217a6790cc469867b37f16dc8a4, type: 3}
+      propertyPath: targetSpawnPos.x
+      value: 7.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6986988434861108263, guid: cb316217a6790cc469867b37f16dc8a4, type: 3}
+      propertyPath: targetSpawnPos.y
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 8296197444979156968, guid: cb316217a6790cc469867b37f16dc8a4, type: 3}
       propertyPath: m_SortingLayer
       value: 1
@@ -4245,6 +4269,14 @@ PrefabInstance:
     - target: {fileID: 6986988434861108263, guid: cb316217a6790cc469867b37f16dc8a4, type: 3}
       propertyPath: sceneToLoad
       value: StudyRoom
+      objectReference: {fileID: 0}
+    - target: {fileID: 6986988434861108263, guid: cb316217a6790cc469867b37f16dc8a4, type: 3}
+      propertyPath: targetSpawnPos.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6986988434861108263, guid: cb316217a6790cc469867b37f16dc8a4, type: 3}
+      propertyPath: targetSpawnPos.y
+      value: -2.5
       objectReference: {fileID: 0}
     - target: {fileID: 8296197444979156968, guid: cb316217a6790cc469867b37f16dc8a4, type: 3}
       propertyPath: m_SortingLayer
@@ -4589,6 +4621,14 @@ PrefabInstance:
     - target: {fileID: 6986988434861108263, guid: cb316217a6790cc469867b37f16dc8a4, type: 3}
       propertyPath: sceneToLoad
       value: Basement
+      objectReference: {fileID: 0}
+    - target: {fileID: 6986988434861108263, guid: cb316217a6790cc469867b37f16dc8a4, type: 3}
+      propertyPath: targetSpawnPos.x
+      value: -8.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6986988434861108263, guid: cb316217a6790cc469867b37f16dc8a4, type: 3}
+      propertyPath: targetSpawnPos.y
+      value: -2.5
       objectReference: {fileID: 0}
     - target: {fileID: 8296197444979156968, guid: cb316217a6790cc469867b37f16dc8a4, type: 3}
       propertyPath: m_SortingLayer
@@ -5116,6 +5156,14 @@ PrefabInstance:
     - target: {fileID: 6986988434861108263, guid: cb316217a6790cc469867b37f16dc8a4, type: 3}
       propertyPath: sceneToLoad
       value: Bedroom
+      objectReference: {fileID: 0}
+    - target: {fileID: 6986988434861108263, guid: cb316217a6790cc469867b37f16dc8a4, type: 3}
+      propertyPath: targetSpawnPos.x
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6986988434861108263, guid: cb316217a6790cc469867b37f16dc8a4, type: 3}
+      propertyPath: targetSpawnPos.y
+      value: -4.5
       objectReference: {fileID: 0}
     - target: {fileID: 8296197444979156968, guid: cb316217a6790cc469867b37f16dc8a4, type: 3}
       propertyPath: m_SortingLayer
